@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Sponsors() {
   return (
     <section className="pb-10" id="sponsors">

@@ -1,7 +1,8 @@
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 import Head from "next/head";
 import Link from "next/link";
+import React from "react";
 
 export default function Error() {
   return (
@@ -24,14 +25,14 @@ export default function Error() {
             Plutonium doesn&apos;t do well with generic 404 pages. Hence: this
             page. If you&apos;re here from clicking demo: it was on purpose!
           </p>
-          <Link href="/">
+          <Link href="/" passHref legacyBehavior>
             <a className="px-4 py-2.5 text-black dark:text-white border dark:hover:bg-white dark:hover:text-black rounded-lg shadow transition duration-300 hover:shadow-md">
               Return Home
             </a>
           </Link>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
+import React from "react";
 
 export default function Footer() {
   const router = useRouter();
@@ -7,9 +8,9 @@ export default function Footer() {
     <footer className="text-black dark:text-gray-300 body-font">
       <div className="container flex flex-col items-center px-10 pb-8 mx-auto border-t border-purple-600 dark:border-purple-300 sm:flex-row">
         <Link href="/">
-          <a className="flex items-center justify-center mt-3 text-xl font-medium title-font md:ml-3 md:justify-start">
+          <span className="flex items-center justify-center mt-3 text-xl font-medium title-font md:ml-3 md:justify-start">
             PLUTONIUM
-          </a>
+          </span>
         </Link>
         <div className="invisible h-5 mt-3 ml-4 border-l border-black md:visible dark:border-gray-300"></div>
         <a
@@ -102,7 +103,7 @@ export default function Footer() {
               height="20"
               viewBox="0 0 25 24"
               fill="none"
-              title="GitHub logo"
+              // title="GitHub logo"
               className="w-5 h-5"
             >
               <path

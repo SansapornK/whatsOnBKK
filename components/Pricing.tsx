@@ -1,3 +1,5 @@
+import React from "react";
+
 const Feature = () => {
   return (
     <li className="flex mb-1 space-x-3">
@@ -64,12 +66,12 @@ export default function Pricing() {
             <h1 className="text-sm font-semibold text-gray-500 uppercase">
               What&apos;s included
             </h1>
-            <p className="font-normal text-gray-500 dark:text-gray-400 text-md">
+            <div className="font-normal text-gray-500 dark:text-gray-400 text-md">
               <ul>
                 <Feature />
                 <Feature />
               </ul>
-            </p>
+            </div>
           </div>
           <div className="p-5 mb-10 space-y-6 border-2 border-rose-500 dark:border-rose-300 rounded-2xl">
             <h1 className="text-xl font-bold text-center text-teal-600 dark:text-teal-300 md:text-2xl sm:text-left">
@@ -94,14 +96,14 @@ export default function Pricing() {
             <h1 className="text-sm font-semibold text-gray-500 uppercase">
               What&apos;s included
             </h1>
-            <p className="font-normal text-gray-500 dark:text-gray-400 text-md">
+            <div className="font-normal text-gray-500 dark:text-gray-400 text-md">
               <ul>
                 <Feature />
                 <Feature />
                 <Feature />
                 <Feature />
               </ul>
-            </p>
+            </div>
           </div>
           <div className="p-5 mt-5 mb-10 space-y-6 border shadow-md rounded-2xl">
             <h1 className="text-xl font-bold text-center text-teal-600 dark:text-teal-300 md:text-2xl sm:text-left">
@@ -126,7 +128,7 @@ export default function Pricing() {
             <h1 className="text-sm font-semibold text-gray-500 uppercase">
               What&apos;s included
             </h1>
-            <p className="font-normal text-gray-500 dark:text-gray-400 text-md">
+            <div className="font-normal text-gray-500 dark:text-gray-400 text-md">
               <ul>
                 <Feature />
                 <Feature />
@@ -135,7 +137,7 @@ export default function Pricing() {
                 <Feature />
                 <Feature />
               </ul>
-            </p>
+            </div>
           </div>
         </div>
       </div>

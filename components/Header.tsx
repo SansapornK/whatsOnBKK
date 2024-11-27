@@ -1,6 +1,9 @@
+/* eslint-disable @next/next/link-passhref */
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import React from "react";
 
 export default function Header() {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -17,9 +20,9 @@ export default function Header() {
       <div className="flex flex-col flex-wrap max-w-5xl p-2.5 mx-auto md:flex-row">
         <div className="flex flex-row items-center justify-between p-2 md:p-1">
           <Link href="/">
-            <a className="mb-4 text-2xl font-medium text-black transition duration-300 hover:text-gray-300 dark:text-gray-300 dark:hover:text-white md:mb-0">
+            <span className="mb-4 text-2xl font-medium text-black transition duration-300 hover:text-gray-300 dark:text-gray-300 dark:hover:text-white md:mb-0">
               PLUTONIUM
-            </a>
+            </span>
           </Link>
           <button
             className="px-3 py-1 pb-4 ml-auto text-black outline-none dark:text-gray-300 md:hidden"
@@ -51,22 +54,20 @@ export default function Header() {
           }
         >
           <div className="flex flex-wrap items-center justify-center pt-1 pl-2 ml-1 space-x-8 md:space-x-16 md:mx-auto md:pl-14">
-            <a
-              href="/#features"
-              className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300"
-            >
-              Features
-            </a>
-            <a
-              href="/#pricing"
-              className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300"
-            >
-              Pricing
-            </a>
+            <Link href="/event">
+              <span className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300">
+                Events
+              </span>
+            </Link>
+            <Link href="/#pricing">
+              <span className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300">
+                Pricing
+              </span>
+            </Link>
             <Link href="/404">
-              <a className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300">
+              <span className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300">
                 Demo
-              </a>
+              </span>
             </Link>
           </div>
           <button

@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Sponsors from "../components/Sponsors";
 import Features from "../components/Features";
 import Pricing from "../components/Pricing";
+import React from "react";
 
 export default function Home() {
   return (
@@ -60,13 +61,14 @@ export default function Home() {
                 <span className="flex justify-center">GitHub Link</span>
               </a>
               <br className="sm:hidden" />
+              {/* Use Link without <a> directly inside */}
               <Link href="404">
-                <a
+                <span
                   className="inline-flex items-center px-5 py-3 mt-2 ml-0 text-sm font-medium text-gray-700 transition duration-300 border rounded shadow dark:hover:border-gray-500 hover:shadow-md md:ml-2 dark:text-gray-300"
-                  aria-label="learn more"
+                  aria-label="see demo"
                 >
                   <span className="flex justify-center">See a Demo</span>
-                </a>
+                </span>
               </Link>
             </div>
           </div>
@@ -94,10 +96,10 @@ export default function Home() {
           className="absolute inset-0 w-full h-full bg-bottom bg-no-repeat bg-cover -z-1"
         /> */}
       </section>
-      <Sponsors />
-      <Features />
+      {/* <Sponsors /> */}
+      {/* <Features />
       <Pricing />
-      <Footer />
+      <Footer /> */}
     </div>
   );
 }
