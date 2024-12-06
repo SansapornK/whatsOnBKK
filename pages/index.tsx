@@ -40,10 +40,10 @@ export default function Home(): JSX.Element {
         <div className="px-4 pt-10 mx-auto max-w-7xl md:pt-16">
           <div className="w-full pb-5 mx-auto text-center md:w-11/12">
             <h1 className="mb-3 text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-6xl">
-              Discover. Plan. Attend.
+              Discover. Plan. Attend. naja
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r dark:bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
-                Unveil the Best of the City
+                Unveil the Best of the City naja
               </span>
             </h1>
             <p className="max-w-xl pt-5 mx-auto text-lg text-gray-600 dark:text-gray-400 md:text-lg">
