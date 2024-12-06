@@ -142,7 +142,7 @@ export default function Home(): JSX.Element {
               </h1>
               <Link href="/all-upcoming-events">
                 <a className="inline-flex items-center px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-800 transition duration-300 shadow-md">
-                  View All Event
+                  View All Events
                 </a>
               </Link>
             </div>
