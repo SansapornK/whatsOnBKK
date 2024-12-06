@@ -157,7 +157,7 @@ export default function Home(): JSX.Element {
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Music Festival</h3>
-                  <p className="text-gray-700 mb-4">Join us for a night of live music and performances!</p>
+                  <p className="text-gray-700 mb-4">Join us for a night of live music and performances! eiei</p>
                   <Link href="/event-details/1">
                     <a className="text-indigo-600 hover:text-indigo-800 font-medium">See More →</a>
                   </Link>
