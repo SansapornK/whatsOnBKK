@@ -50,7 +50,7 @@ export default function Home(): JSX.Element {
               Discover events suited to your taste, from music and arts to local festivals.
               Whether big events or hidden gems, get instant notifications about upcoming
               happenings tailored to your interests and location. Stay updated and never
-              miss out on the best experiences in the city!
+              miss out on the best experiences in the city! eiei
             </p>
           </div>
 
