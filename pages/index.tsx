@@ -140,7 +140,7 @@ export default function Home(): JSX.Element {
                   Events141414
                 </span>
               </h1>
-              <Link href="/all-upcoming-events">
+              <Link href="/all-upcoming-events" legacyBehavior>
                 <a className="inline-flex items-center px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-800 transition duration-300 shadow-md">
                   View All Events
                 </a>
@@ -158,7 +158,7 @@ export default function Home(): JSX.Element {
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Music Festival</h3>
                   <p className="text-gray-700 mb-4">Join us for a night of live music and performances! eiei</p>
-                  <Link href="/event-details/1">
+                  <Link href="/event-details/1" legacyBehavior>
                     <a className="text-indigo-600 hover:text-indigo-800 font-medium">See More →</a>
                   </Link>
                 </div>
@@ -174,7 +174,7 @@ export default function Home(): JSX.Element {
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Art Exhibition</h3>
                   <p className="text-gray-700 mb-4">Explore the creative works of local artists.</p>
-                  <Link href="/event-details/2">
+                  <Link href="/event-details/2" legacyBehavior>
                     <a className="text-indigo-600 hover:text-indigo-800 font-medium">See More →</a>
                   </Link>
                 </div>
@@ -190,7 +190,7 @@ export default function Home(): JSX.Element {
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Local Festival</h3>
                   <p className="text-gray-700 mb-4">Experience the culture and traditions of the community.</p>
-                  <Link href="/event-details/3">
+                  <Link href="/event-details/3" legacyBehavior>
                     <a className="text-indigo-600 hover:text-indigo-800 font-medium">See More →</a>
                   </Link>
                 </div>
