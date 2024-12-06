@@ -137,7 +137,7 @@ export default function Home(): JSX.Element {
               <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-6xl">
                 Upcoming{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
-                  Events
+                  Events141414
                 </span>
               </h1>
               <Link href="/all-upcoming-events">
