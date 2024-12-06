@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { format } from 'date-fns';
+import React, { useState, useEffect } from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { format } from "date-fns";
 
 // Define a TypeScript interface based on the structure of your event document
 interface Coordinates {
@@ -34,25 +34,25 @@ interface Event {
 export default function EventsPage() {
   const [events, setEvents] = useState<Event[]>([]); // Use the Event type here
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]); // Make sure it's an array
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedType, setSelectedType] = useState('');
-  const [selectedArea, setSelectedArea] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  const [selectedArea, setSelectedArea] = useState("");
 
   useEffect(() => {
     // Fetch events from the API
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/api/dbConnect');
+        const response = await fetch("/api/dbConnect");
         const data: Event[] = await response.json(); // Type the response as Event[]
-        
+
         if (Array.isArray(data)) {
           setEvents(data);
           setFilteredEvents(data); // Initial display
         } else {
-          console.error('Fetched data is not an array:', data);
+          console.error("Fetched data is not an array:", data);
         }
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error("Error fetching events:", error);
       }
     };
 
@@ -62,26 +62,27 @@ export default function EventsPage() {
   // Handle search and filters
   useEffect(() => {
     let filtered = events;
-  
-    console.log('Filtering with:', { searchTerm, selectedType, selectedArea });
-  
+
+    console.log("Filtering with:", { searchTerm, selectedType, selectedArea });
+
     if (searchTerm) {
-      filtered = filtered.filter(event =>
+      filtered = filtered.filter((event) =>
         event.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-  
+
     if (selectedType) {
-      filtered = filtered.filter(event => event.type === selectedType);
+      filtered = filtered.filter((event) => event.type === selectedType);
     }
-  
+
     if (selectedArea) {
-      filtered = filtered.filter(event => event.location.area === selectedArea);
+      filtered = filtered.filter(
+        (event) => event.location.area === selectedArea
+      );
     }
-  
+
     setFilteredEvents(filtered);
   }, [searchTerm, selectedType, selectedArea, events]);
-  
 
   return (
     <div className="bg-white dark:bg-black min-h-screen">
@@ -122,41 +123,38 @@ export default function EventsPage() {
 
         {/* Event List */}
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {filteredEvents.length > 0 ? (
-  filteredEvents.map((event) => (
-    <div key={event._id} className="border p-4 rounded shadow">
-      <h2 className="text-xl font-semibold">{event.name}</h2>
-      <p className="text-gray-700">{event.description}</p>
-      <p className="text-gray-500 mt-2">{event.location.area}</p>
-      <p className="text-gray-500">
-        {format(new Date(event.date), 'MMM dd, yyyy, h:mm a')}
-      </p>
-      <p className="text-gray-500">{event.time}</p>
-      <div className="flex gap-2">
-        {Array.isArray(event.images) && event.images.length > 0 ? (
-          event.images.map((image, idx) => (
-            <img
-              key={idx}
-              src={image}
-              alt={`Event Image ${idx + 1}`}
-              className="w-16 h-16 object-cover rounded"
-            />
-          ))
-        ) : (
-          <p>No images available</p>
-        )}
-      </div>
-    </div>
-  ))
-) : (
-  <p>No events found.</p>
-)}
-
-</div>
-
+          {filteredEvents.length > 0 ? (
+            filteredEvents.map((event) => (
+              <div key={event._id} className="border p-4 rounded shadow">
+                <h2 className="text-xl font-semibold">{event.name}</h2>
+                <p className="text-gray-700">{event.description}</p>
+                <p className="text-gray-500 mt-2">{event.location.area}</p>
+                <p className="text-gray-500">
+                  {format(new Date(event.date), "MMM dd, yyyy")}
+                </p>
+                <p className="text-gray-500">{event.time}</p>
+                <div className="flex gap-2">
+                  {Array.isArray(event.images) && event.images.length > 0 ? (
+                    event.images.map((image, idx) => (
+                      <img
+                        key={idx}
+                        src={image}
+                        alt={`Event Image ${idx + 1}`}
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                    ))
+                  ) : (
+                    <p>No images available</p>
+                  )}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No events found.</p>
+          )}
+        </div>
       </div>
       <Footer />
     </div>
   );
-
 }
