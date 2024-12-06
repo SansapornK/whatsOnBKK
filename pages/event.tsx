@@ -130,7 +130,7 @@ export default function EventsPage() {
                 <p className="text-gray-700">{event.description}</p>
                 <p className="text-gray-500 mt-2">{event.location.area}</p>
                 <p className="text-gray-500">
-                  {format(new Date(event.date), "MMM dd, yyyy")}
+                  {format(new Date(event.date), "MMM dd, yyyy, h:mm a")}
                 </p>
                 <p className="text-gray-500">{event.time}</p>
                 <div className="flex gap-2">
@@ -150,7 +150,7 @@ export default function EventsPage() {
               </div>
             ))
           ) : (
-            <p>No events found</p>
+            <p>No events found.</p>
           )}
         </div>
       </div>
