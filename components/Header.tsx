@@ -21,7 +21,7 @@ export default function Header() {
         <div className="flex flex-row items-center justify-between p-2 md:p-1">
           <Link href="/">
             <span className="mb-4 text-2xl font-medium text-black transition duration-300 hover:text-gray-300 dark:text-gray-300 dark:hover:text-white md:mb-0">
-              PLUTONIUM
+            What’sOnBKK
             </span>
           </Link>
           <button
@@ -56,17 +56,17 @@ export default function Header() {
           <div className="flex flex-wrap items-center justify-center pt-1 pl-2 ml-1 space-x-8 md:space-x-16 md:mx-auto md:pl-14">
             <Link href="/event">
               <span className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300">
-                Events
+                Upcoming Events
               </span>
             </Link>
             <Link href="/#pricing">
               <span className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300">
-                Pricing
+                Map
               </span>
             </Link>
             <Link href="/404">
               <span className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300">
-                Demo
+                About Us
               </span>
             </Link>
           </div>
