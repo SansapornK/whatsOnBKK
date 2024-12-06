@@ -150,7 +150,7 @@ export default function EventsPage() {
               </div>
             ))
           ) : (
-            <p>No events found.</p>
+            <p>No events found</p>
           )}
         </div>
       </div>
