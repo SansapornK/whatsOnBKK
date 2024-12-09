@@ -49,7 +49,7 @@ export default function Home() {
             <p className="max-w-xl pt-5 mx-auto text-lg text-gray-600 dark:text-gray-400 md:text-lg">
               Plutonium is a Next.js template styled with TailwindCSS. It boasts
               built-in dark-mode support, configured Next-SEO for the best SEO
-              optimizations, and clean, organized, easy-to-edit code
+              optimizations, and clean, organized, easy-to-edit code.
             </p>
             <div className="mt-6 text-center md:ml-6">
               <a
