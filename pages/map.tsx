@@ -4,7 +4,7 @@ import { NextSeo } from "next-seo";
 import dynamic from "next/dynamic";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Features from "../components/Features";
+import Features from "../components/DiscoverArea";
 
 // ใช้ dynamic import เพื่อให้แผนที่แสดงผลเฉพาะฝั่ง client
 const MapEvents = dynamic(() => import("../components/MapEvents"), { ssr: false });

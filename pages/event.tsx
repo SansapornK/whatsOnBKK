@@ -42,7 +42,7 @@ export default function EventsPage() {
     // Fetch events from the API
     const fetchEvents = async () => {
       try {
-        const response = await fetch("/api/dbConnect");
+        const response = await fetch("/api/dbConnect?type=events");
         const data: Event[] = await response.json(); // Type the response as Event[]
 
         if (Array.isArray(data)) {

@@ -3,9 +3,12 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Features from "../components/Features";
+import Features from "../components/DiscoverArea";
+import Eventpreview from "../components/Eventpreview";
+
 
 export default function Home(): JSX.Element {
+
   return (
     <div className="bg-white dark:bg-black">
       <NextSeo
@@ -40,20 +43,17 @@ export default function Home(): JSX.Element {
         <div className="px-4 pt-10 mx-auto max-w-7xl md:pt-16">
           <div className="w-full pb-5 mx-auto text-center md:w-11/12">
             <h1 className="mb-3 text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-6xl">
-              Discover. Plan. Attend. naja
+              Discover. Plan. Attend.
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r dark:bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
-                Unveil the Best of the City naja
+                Unveil the Best of the City
               </span>
             </h1>
             <p className="max-w-xl pt-5 mx-auto text-lg text-gray-600 dark:text-gray-400 md:text-lg">
               Discover events suited to your taste, from music and arts to local festivals.
               Whether big events or hidden gems, get instant notifications about upcoming
               happenings tailored to your interests and location. Stay updated and never
-              miss out on the best experiences in the city! eiei
-              Plutonium is a Next.js template styled with TailwindCSS. It boasts
-              built-in dark-mode support, configured Next-SEO for the best SEO
-              optimizations, and clean, organized, easy-to-edit code
+              miss out on the best experiences in the city!
             </p>
           </div>
 
@@ -134,77 +134,12 @@ export default function Home(): JSX.Element {
             </div>
           </div>
 
-          {/* Event preview section */}
-          <div className="mt-12 py-8">
-            <div className="flex items-center justify-between mb-6">
-              <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-6xl">
-                Upcoming{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
-                  Events141414
-                </span>
-              </h1>
-              <Link href="/all-upcoming-events" legacyBehavior>
-                <a className="inline-flex items-center px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-800 transition duration-300 shadow-md">
-                  View All Events
-                </a>
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {/* Event 1 */}
-              <div className="group relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-105">
-                <img
-                  src="https://example.com/event-image1.jpg"
-                  alt="Music Festival"
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Music Festival</h3>
-                  <p className="text-gray-700 mb-4">Join us for a night of live music and performances! eiei</p>
-                  <Link href="/event-details/1" legacyBehavior>
-                    <a className="text-indigo-600 hover:text-indigo-800 font-medium">See More →</a>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Event 2 */}
-              <div className="group relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-105">
-                <img
-                  src="https://example.com/event-image2.jpg"
-                  alt="Art Exhibition"
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Art Exhibition</h3>
-                  <p className="text-gray-700 mb-4">Explore the creative works of local artists.</p>
-                  <Link href="/event-details/2" legacyBehavior>
-                    <a className="text-indigo-600 hover:text-indigo-800 font-medium">See More →</a>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Event 3 */}
-              <div className="group relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-105">
-                <img
-                  src="https://example.com/event-image3.jpg"
-                  alt="Local Festival"
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Local Festival</h3>
-                  <p className="text-gray-700 mb-4">Experience the culture and traditions of the community.</p>
-                  <Link href="/event-details/3" legacyBehavior>
-                    <a className="text-indigo-600 hover:text-indigo-800 font-medium">See More →</a>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+          
 
 
         </div>
       </section>
-
+      <Eventpreview />
       <Features />
       <Footer />
     </div>

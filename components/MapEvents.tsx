@@ -1,70 +1,96 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
+import { format, parseISO } from "date-fns";
 
 interface Event {
+  _id: string;
   name: string;
-  lat: number;
-  lng: number;
+  description: string;
+  type: string;
+  location: {
+    area: string;
+    address: string;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+  };
   date: string;
   time: string;
-  description: string;
+  createdBy: string;
+  images: string[];
+  attendees: string[];
+  isPublic: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const MapEvents: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null);
+  const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const L = require("leaflet");
 
+      // Initialize map
       const map = L.map(mapRef.current!).setView([13.7563, 100.5018], 12);
 
+      // Set up tile layer
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
       }).addTo(map);
 
-      // Custom icon for events
+      // Custom icon for event markers
       const pinIcon = L.icon({
-        iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
-        iconSize: [40, 40],
-        iconAnchor: [20, 40],
-        popupAnchor: [0, -30],
+        iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png", // Custom icon URL
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -20],
       });
 
-      const events: Event[] = [
-        {
-          name: "Music Festival",
-          lat: 13.7563,
-          lng: 100.5018,
-          date: "2024-12-15",
-          time: "18:00 - 22:00",
-          description: "Enjoy live music performances.",
-        },
-        {
-          name: "Art Exhibition",
-          lat: 13.7465,
-          lng: 100.5320,
-          date: "2024-12-18",
-          time: "10:00 - 17:00",
-          description: "Explore contemporary art.",
-        },
-        {
-          name: "Food Market",
-          lat: 13.7649,
-          lng: 100.5383,
-          date: "2024-12-20",
-          time: "11:00 - 22:00",
-          description: "Savor street food.",
-        },
-      ];
+      // Fetch events from the API
+      const fetchEvents = async () => {
+        try {
+          const response = await fetch("/api/dbConnect?type=events"); // Fetch events from your backend
+          if (!response.ok) {
+            console.error("Failed to fetch events. Status:", response.status);
+            return;
+          }
 
-      events.forEach((event) => {
-        L.marker([event.lat, event.lng], { icon: pinIcon })
-          .addTo(map)
-          .bindPopup(
-            `<b>${event.name}</b><br>Date: ${event.date}<br>Time: ${event.time}<br>Description: ${event.description}`
-          );
-      });
+          const data = await response.json(); // Parse the JSON response
+          console.log("Fetched Events:", data);
+
+          // Loop over the fetched events and add markers to the map
+          data.forEach((event: Event) => {
+            const { coordinates } = event.location;
+            console.log(`Coordinates for ${event.name}:`, coordinates);
+
+            if (!coordinates?.lat || !coordinates?.lng) {
+              console.error("Invalid coordinates for event:", event.name);
+              return;
+            }
+
+            const parsedDate = parseISO(event.date);
+            const formattedDate = format(parsedDate, "MMM dd, yyyy, h:mm a");
+
+            // Add marker to the map
+            L.marker([coordinates.lat, coordinates.lng], { icon: pinIcon })
+              .addTo(map)
+              .bindPopup(`
+                <b>${event.name}</b><br>
+                Location: ${event.location.area}<br>
+                Date: ${formattedDate}<br>
+                Time: ${event.time}<br>
+                
+              `);
+          });
+        } catch (error) {
+          console.error("Error fetching events:", error);
+        }
+      };
+
+      fetchEvents(); // Call fetch function to load events
     }
   }, []);
 
