@@ -10,10 +10,6 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
-  // When mounted on client, now we can show the UI
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) return null;
 
   return (
     <header className="w-full sticky-nav">
@@ -103,17 +99,17 @@ export default function Header() {
             )}
           </button>
           <a
-            href="/auth"
+            href="/signin"
             rel="noopener noreferrer"
-            target="_blank"
             className="invisible dark:hover:border-gray-500 hover:shadow-md transition duration-300 mr-4 text-black border px-3 py-1.5 rounded dark:text-gray-300 md:visible"
           >
             Sign in
           </a>
           <a
-            href="#"
+          
+            href="/register"
             rel="noopener noreferrer"
-            target="_blank"
+            
             className="invisible md:visible px-3 py-1.5 transition-colors hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black bg-black dark:bg-white rounded"
           >
             Sign up

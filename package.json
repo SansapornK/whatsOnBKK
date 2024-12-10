@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "date-fns": "^4.1.0",
     "glob-parent": "^5.1.2",
     "leaflet": "^1.9.4",
