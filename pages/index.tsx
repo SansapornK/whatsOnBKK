@@ -51,6 +51,9 @@ export default function Home(): JSX.Element {
               Whether big events or hidden gems, get instant notifications about upcoming
               happenings tailored to your interests and location. Stay updated and never
               miss out on the best experiences in the city! eiei
+              Plutonium is a Next.js template styled with TailwindCSS. It boasts
+              built-in dark-mode support, configured Next-SEO for the best SEO
+              optimizations, and clean, organized, easy-to-edit code
             </p>
           </div>
 

@@ -1,214 +1,92 @@
-import React from "react";
+import React from 'react';
 
-export default function Features() {
+const DiscoverBangkokAreas: React.FC = () => {
   return (
-    <section id="features" className="py-12">
-      <div className="max-w-xl px-4 py-12 mx-auto sm:px-6 lg:max-w-6xl lg:px-8">
-        <h1 className="mb-8 text-2xl font-bold tracking-normal text-center text-gray-800 md:leading-tight md:tracking-normal dark:text-gray-200 md:text-4xl">
-          Supporting the{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r dark:bg-gradient-to-r from-rose-500 via-fuchsia-500 to-indigo-500 dark:from-rose-400 dark:via-fuchsia-400 dark:to-indigo-400">
-            finest
-          </span>{" "}
-          and{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r dark:bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-rose-500 dark:from-indigo-400 dark:via-fuchsia-400 dark:to-rose-400">
-            richest
-          </span>{" "}
-          features.
+    <section id="discover-bangkok-areas" className="py-12 bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl px-4 py-12 mx-auto sm:px-6 lg:px-8">
+        <h1 className="mb-8 text-3xl font-extrabold text-center text-gray-900 md:text-4xl dark:text-gray-100">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r dark:bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 dark:from-green-400 dark:via-yellow-400 dark:to-red-400">
+            Explore the Heart of Bangkok:
+          </span>
+          <br />
+          Discover Hidden Gems and Iconic Areas
         </h1>
-        <p className="max-w-md mx-auto mb-10 text-lg text-gray-600 dark:text-gray-400 md:text-lg">
-          We&apos;re introducing a new wave of template designs that sky-rocket
-          the interaction between users and <b>your</b> app.
+        <p className="text-center text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          Immerse yourself in the pulse of Bangkok. Whether you're looking for a lively street scene, cultural gems, or peaceful riverside escapes, there’s something for everyone. Stay updated with events and get personalized alerts based on your interests and location.
         </p>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div className="mb-10 space-y-6">
-            <h1 className="text-xl font-bold text-center text-rose-600 dark:text-rose-300 md:text-2xl sm:text-left">
-              Next.js 11
-            </h1>
-            <div className="h-auto">
-              <a
-                href="https://unsplash.com/photos/ymVslcVAzg8"
-                rel="noreferrer"
-                target="_blank"
-              >
-                <img
-                  className="transition duration-700 rounded shadow-2xl h-80 hover:shadow-3xl md:hover:transform md:hover:scale-105"
-                  src="/images/placeholder-2.webp"
-                  alt="Placeholder for Next.js"
-                />
-              </a>
-            </div>
-            <div className="mx-2 font-normal text-gray-500 dark:text-gray-400 text-md">
-              <ul className="mr-0 md:mr-10">
-                <li className="mb-2">
-                  <span className="font-semibold">Conformance</span>: A system
-                  that provides carefully crafted solutions to support optimal
-                  UX.
-                </li>
-                <li className="mb-2">
-                  <span className="font-semibold">Improved Performance</span>:
-                  Further optimizations to improve cold startup time so you can
-                  start coding faster.
-                </li>
-                <li className="mb-2">
-                  <span className="text-purple-500 dark:text-purple-400 px-1 py-0.75 border border-gray-200 dark:border-gray-800 rounded-md bg-gray-100 dark:bg-gray-900">
-                    `next/script`
-                  </span>{" "}
-                  updates
-                </li>
-                <li className="mb-2">
-                  <span className="text-purple-500 dark:text-purple-400 px-1 py-0.75 border border-gray-200 dark:border-gray-800 rounded-md bg-gray-100 dark:bg-gray-900">
-                    `next/image`
-                  </span>{" "}
-                  updates
-                </li>
-              </ul>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {/* Yaowarat (Chinatown) */}
+          <div className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:translate-y-4">
+            <a href="https://unsplash.com/photos/eG4A4gk1ZJY" target="_blank" rel="noreferrer">
+              <img
+                className="w-full h-60 object-cover transition-transform duration-700 ease-in-out transform hover:scale-110"
+                src="/images/China-Town-Bangkok.jpg"
+                alt="Chinatown Bangkok"
+              />
+            </a>
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+              <h2 className="text-2xl font-semibold">Yaowarat (Chinatown)</h2>
+              <p className="text-sm mt-2">
+                Delve into the vibrant culture, culinary wonders, and rich history of Chinatown. From street food feasts to traditional festivals, there’s always something exciting happening.
+              </p>
             </div>
           </div>
-          <div className="mb-10 space-y-6">
-            <h1 className="text-xl font-bold text-center text-rose-600 dark:text-rose-300 md:text-2xl sm:text-left">
-              TailwindCSS JIT
-            </h1>
-            <div className="h-auto">
-              <a
-                href="https://unsplash.com/photos/qOEiV-8w-MQ"
-                rel="noreferrer"
-                target="_blank"
-              >
-                <img
-                  className="transition duration-700 rounded shadow-2xl h-80 hover:shadow-3xl md:hover:transform md:hover:scale-105"
-                  src="/images/placeholder-3.webp"
-                  alt="Placeholder for TailwindCSS JIT"
-                />
-              </a>
-            </div>
-            <div className="mx-2 font-normal text-gray-500 dark:text-gray-400 text-md">
-              <ul className="mr-0 md:mr-10">
-                <li className="mb-2">
-                  <span className="font-semibold">Just-in-Time Mode</span>: A
-                  faster, more powerful, on-demand engine for Tailwind CSS
-                  v2.1+.
-                </li>
-                <li className="mb-2">
-                  <span className="font-semibold">
-                    Lightning fast build times
-                  </span>
-                </li>
-                <li className="mb-2">
-                  <span className="font-semibold">
-                    Identical CSS in development and production
-                  </span>
-                </li>
-                <li className="mb-2">
-                  <span className="font-semibold">
-                    Better browser performance in development
-                  </span>
-                </li>
-                <li className="mb-2">
-                  <span className="text-purple-500 dark:text-purple-400 px-1 py-0.75 border border-gray-200 dark:border-gray-800 rounded-md bg-gray-100 dark:bg-gray-900">
-                    `mode: &apos;jit&apos;`
-                  </span>
-                </li>
-              </ul>
+
+          {/* Khao San Road */}
+          <div className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:translate-y-4">
+            <a href="https://unsplash.com/photos/FL-5Y95f6xA" target="_blank" rel="noreferrer">
+              <img
+                className="w-full h-60 object-cover transition-transform duration-700 ease-in-out transform hover:scale-110"
+                src="/images/khao-san-road.jpg"
+                alt="Khao San Road"
+              />
+            </a>
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+              <h2 className="text-2xl font-semibold">Khao San Road</h2>
+              <p className="text-sm mt-2">
+                Experience the bustling energy of Khao San Road, where cultural fusion meets vibrant nightlife. Perfect for those seeking adventure and unique street performances.
+              </p>
             </div>
           </div>
-          <div className="mb-10 space-y-6">
-            <h1 className="text-xl font-bold text-center text-rose-600 dark:text-rose-300 md:text-2xl sm:text-left">
-              Dark Mode
-            </h1>
-            <div className="h-auto">
-              <a
-                href="https://unsplash.com/photos/p7o0qrl8hv8"
-                rel="noreferrer"
-                target="_blank"
-              >
-                <img
-                  className="transition duration-700 rounded shadow-2xl h-80 hover:shadow-3xl md:hover:transform md:hover:scale-105"
-                  src="/images/placeholder-4.webp"
-                  alt="Placeholder for Dark Mode"
-                />
-              </a>
-            </div>
-            <div className="mx-2 font-normal text-gray-500 dark:text-gray-400 text-md">
-              <ul className="mr-0 md:mr-10">
-                <li className="mb-2">
-                  <a
-                    href="https://github.com/pacocoursey/next-themes"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-semibold"
-                  >
-                    next-themes
-                  </a>
-                  : An abstraction for themes in your Next.js app.
-                </li>
-                <li className="mb-2">
-                  <span className="font-semibold">System settings</span>: Uses
-                  system settings to activate dark mode/light mode.
-                </li>
-                <li className="mb-2">
-                  <span className="font-semibold">No flash</span>: No flash on
-                  switching themes or load in both SSG and SSR.
-                </li>
-                <li className="mb-2">
-                  <span className="text-purple-500 dark:text-purple-400 px-1 py-0.75 border border-gray-200 dark:border-gray-800 rounded-md bg-gray-100 dark:bg-gray-900">
-                    `useTheme`
-                  </span>{" "}
-                  hook
-                </li>
-              </ul>
+
+          {/* Sukhumvit Area */}
+          <div className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:translate-y-4">
+            <a href="https://unsplash.com/photos/5HgKXyCpG-8" target="_blank" rel="noreferrer">
+              <img
+                className="w-full h-60 object-cover transition-transform duration-700 ease-in-out transform hover:scale-110"
+                src="/images/sukhumvit-area.jpg"
+                alt="Sukhumvit Area"
+              />
+            </a>
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+              <h2 className="text-2xl font-semibold">Sukhumvit Area</h2>
+              <p className="text-sm mt-2">
+                Sukhumvit is where modern luxury meets authentic street life. Enjoy shopping malls, gourmet dining, and trendy bars, all while discovering pop-up events and live shows.
+              </p>
             </div>
           </div>
-          <div className="mb-10 space-y-6">
-            <h1 className="text-xl font-bold text-center text-rose-600 dark:text-rose-300 md:text-2xl sm:text-left">
-              Next-SEO
-            </h1>
-            <div className="h-auto">
-              <a
-                href="https://unsplash.com/photos/_CrD1UmfWqc"
-                rel="noreferrer"
-                target="_blank"
-              >
-                <img
-                  className="transition duration-700 rounded shadow-2xl h-80 hover:shadow-3xl md:hover:transform md:hover:scale-105"
-                  src="/images/placeholder-5.webp"
-                  alt="Placeholder for Next-SEO"
-                />
-              </a>
-            </div>
-            <div className="mx-2 font-normal text-gray-500 dark:text-gray-400 text-md">
-              <ul className="mr-0 md:mr-10">
-                <li className="mb-2">
-                  <a
-                    href="https://github.com/garmeeh/next-seo"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-semibold"
-                  >
-                    next-seo
-                  </a>
-                  : A plugin that makes managing your SEO easier in Next.js
-                  projects.
-                </li>
-                <li className="mb-2">
-                  <span className="font-semibold">Renders to head</span>: All
-                  props passed into{" "}
-                  <span className="text-purple-500 dark:text-purple-400 px-1 py-0.75 border border-gray-200 dark:border-gray-800 rounded-md bg-gray-100 dark:bg-gray-900">
-                    `next-seo`
-                  </span>{" "}
-                  will render tags into the{" "}
-                  <span className="text-purple-500 dark:text-purple-400 px-1 py-0.75 border border-gray-200 dark:border-gray-800 rounded-md bg-gray-100 dark:bg-gray-900">
-                    {"`<head>`"}
-                  </span>{" "}
-                </li>
-                <li className="mb-2">
-                  <span className="font-semibold">Bare minimum</span>: Next-SEO
-                  should at least have access to a description & a title.
-                </li>
-              </ul>
+
+          {/* Asiatique The Riverfront */}
+          <div className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:translate-y-4">
+            <a href="https://unsplash.com/photos/Fu_w7C5gr3s" target="_blank" rel="noreferrer">
+              <img
+                className="w-full h-60 object-cover transition-transform duration-700 ease-in-out transform hover:scale-110"
+                src="/images/asiatique.jpg"
+                alt="Asiatique The Riverfront"
+              />
+            </a>
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+              <h2 className="text-2xl font-semibold">Asiatique The Riverfront</h2>
+              <p className="text-sm mt-2">
+                Relax by the river and explore riverside shopping, dining, and entertainment at Asiatique. Ideal for families and couples looking for a serene escape with stunning views.
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default DiscoverBangkokAreas;

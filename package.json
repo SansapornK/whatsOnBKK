@@ -10,6 +10,7 @@
   "dependencies": {
     "date-fns": "^4.1.0",
     "glob-parent": "^5.1.2",
+    "leaflet": "^1.9.4",
     "mongodb": "^6.11.0",
     "next": "^15.0.3",
     "next-seo": "^6.6.0",

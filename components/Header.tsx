@@ -59,7 +59,7 @@ export default function Header() {
                 Upcoming Events
               </span>
             </Link>
-            <Link href="/#pricing">
+            <Link href="/map">
               <span className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300">
                 Map
               </span>
@@ -103,7 +103,7 @@ export default function Header() {
             )}
           </button>
           <a
-            href="#"
+            href="/auth"
             rel="noopener noreferrer"
             target="_blank"
             className="invisible dark:hover:border-gray-500 hover:shadow-md transition duration-300 mr-4 text-black border px-3 py-1.5 rounded dark:text-gray-300 md:visible"

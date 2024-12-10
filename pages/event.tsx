@@ -123,36 +123,38 @@ export default function EventsPage() {
 
         {/* Event List */}
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredEvents.length > 0 ? (
-            filteredEvents.map((event) => (
-              <div key={event._id} className="border p-4 rounded shadow">
-                <h2 className="text-xl font-semibold">{event.name}</h2>
-                <p className="text-gray-700">{event.description}</p>
-                <p className="text-gray-500 mt-2">{event.location.area}</p>
-                <p className="text-gray-500">
-                  {format(new Date(event.date), "MMM dd, yyyy, h:mm a")}
-                </p>
-                <p className="text-gray-500">{event.time}</p>
-                <div className="flex gap-2">
-                  {Array.isArray(event.images) && event.images.length > 0 ? (
-                    event.images.map((image, idx) => (
-                      <img
-                        key={idx}
-                        src={image}
-                        alt={`Event Image ${idx + 1}`}
-                        className="w-16 h-16 object-cover rounded"
-                      />
-                    ))
-                  ) : (
-                    <p>No images available</p>
-                  )}
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No events found.</p>
-          )}
-        </div>
+        {filteredEvents.length > 0 ? (
+  filteredEvents.map((event) => (
+    <div key={event._id} className="border p-4 rounded shadow">
+      <h2 className="text-xl font-semibold">{event.name}</h2>
+      <p className="text-gray-700">{event.description}</p>
+      <p className="text-gray-500 mt-2">{event.location.area}</p>
+      <p className="text-gray-500">
+        {format(new Date(event.date), 'MMM dd, yyyy, h:mm a')}
+      </p>
+      <p className="text-gray-500">{event.time}</p>
+      <div className="flex gap-2">
+        {Array.isArray(event.images) && event.images.length > 0 ? (
+          event.images.map((image, idx) => (
+            <img
+              key={idx}
+              src={image}
+              alt={`Event Image ${idx + 1}`}
+              className="w-16 h-16 object-cover rounded"
+            />
+          ))
+        ) : (
+          <p>No images available</p>
+        )}
+      </div>
+    </div>
+  ))
+) : (
+  <p>No events found.</p>
+)}
+
+</div>
+
       </div>
       <Footer />
     </div>
