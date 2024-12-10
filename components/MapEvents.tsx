@@ -71,8 +71,8 @@ const MapEvents: React.FC = () => {
               return;
             }
 
-            const parsedDate = parseISO(event.date);
-            const formattedDate = format(parsedDate, "MMM dd, yyyy, h:mm a");
+
+            const formattedDate = format(new Date(event.date), 'MMM dd, yyyy')
 
             // Add marker to the map
             L.marker([coordinates.lat, coordinates.lng], { icon: pinIcon })

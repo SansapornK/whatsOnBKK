@@ -90,10 +90,10 @@ export default function EventPreview() {
             </Link>
           </div>
 
-          {/* Render events */}
+         {/* Render events */}
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {events.length > 0 ? (
-              events.map((event) => (
+            {events.slice(0, 3).length > 0 ? ( // Limit to the first 3 events
+              events.slice(0, 3).map((event) => (
                 <div
                   key={event._id}
                   className="group relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-105"
@@ -124,6 +124,7 @@ export default function EventPreview() {
               </div>
             )}
           </div>
+
         </div>
       </div>
     </section>
