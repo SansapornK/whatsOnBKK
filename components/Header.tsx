@@ -17,7 +17,11 @@ export default function Header() {
         <div className="flex flex-row items-center justify-between p-2 md:p-1">
           <Link href="/">
             <span className="mb-4 text-2xl font-medium text-black transition duration-300 hover:text-gray-300 dark:text-gray-300 dark:hover:text-white md:mb-0">
-            What’sOnBKK
+            <img
+    alt="Your Company"
+    src="/images/logo.png"
+    className=" h-40 w-42"
+  />
             </span>
           </Link>
           <button
@@ -107,7 +111,7 @@ export default function Header() {
           </a>
           <a
           
-            href="/register"
+            href="/changepass"
             rel="noopener noreferrer"
             
             className="invisible md:visible px-3 py-1.5 transition-colors hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black bg-black dark:bg-white rounded"

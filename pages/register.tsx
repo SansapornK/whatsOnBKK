@@ -1,12 +1,32 @@
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
-import { ChevronDownIcon } from '@heroicons/react/16/solid';
 
 export default function Example() {
   return (
     <div className="bg-white p-6 rounded-md space-y-6">
       <div className="font-[sans-serif]">
-        <div className="text-center min-h-[160px] sm:p-6 p-4">
-          <h4 className="sm:text-3xl text-2xl font-bold text-black">Create your free account</h4>
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center min-h-[160px]">
+        {/* <div className="text-center min-h-[160px] sm:p-6 p-4"> */}
+            <button
+  onClick={() => history.back()}
+  className="rounded-full p-2 text-gray-600 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  aria-label="Go back"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="2"
+    stroke="currentColor"
+    className="h-6 w-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 19l-7-7 7-7"
+    />
+  </svg>
+</button>
+
+          <h4 className="sm:text-3xl text-2xl font-bold text-black">Create youraccount</h4>
         </div>
 
         <div className="mx-4 mb-4 -mt-16">
