@@ -20,9 +20,10 @@ export default function Header() {
       <div className="flex flex-col flex-wrap max-w-5xl p-2.5 mx-auto md:flex-row">
         <div className="flex flex-row items-center justify-between p-2 md:p-1">
           <Link href="/">
-            <span className="mb-4 text-2xl font-medium text-black transition duration-300 hover:text-gray-300 dark:text-gray-300 dark:hover:text-white md:mb-0">
+            {/* <span className="mb-4 text-2xl font-medium text-black transition duration-300 hover:text-gray-300 dark:text-gray-300 dark:hover:text-white md:mb-0">
             What’sOnBKK
-            </span>
+            </span> */}
+            <img alt="Your Company" src="/images/logo.png" className=" h-40 w-42" />
           </Link>
           <button
             className="px-3 py-1 pb-4 ml-auto text-black outline-none dark:text-gray-300 md:hidden"
@@ -64,7 +65,7 @@ export default function Header() {
                 Map
               </span>
             </Link>
-            <Link href="/404">
+            <Link href="/about">
               <span className="text-black transition duration-300 dark:text-gray-300 hover:text-gray-300">
                 About Us
               </span>
@@ -103,7 +104,7 @@ export default function Header() {
             )}
           </button>
           <a
-            href="/auth"
+            href="/signin"
             rel="noopener noreferrer"
             target="_blank"
             className="invisible dark:hover:border-gray-500 hover:shadow-md transition duration-300 mr-4 text-black border px-3 py-1.5 rounded dark:text-gray-300 md:visible"
