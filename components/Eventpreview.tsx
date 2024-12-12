@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { config } from "process";
+
+const API_URL = "http://localhost:3001";
 
 interface Location {
   city: string;
@@ -95,36 +98,39 @@ export default function EventPreview() {
          {/* Render events */}
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {events.slice(0, 3).length > 0 ? ( // Limit to the first 3 events
-              events.slice(0, 3).map((event) => (
-                <div
-                  key={event._id}
-                  className="group relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-105"
-                >
-                  <img
-                    src={event.images?.[0] || "/placeholder-image.jpg"} 
-                    alt={event.name}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                      {event.name}
-                    </h3>
-                    <p className="text-gray-700 mb-4">
-                      {truncateText(event.description, 100)} {/* Truncate description */}
-                    </p>
-                    <Link href={`/event-details/${event._id}`} legacyBehavior>
-                      <a className="text-indigo-600 hover:text-indigo-800 font-medium">
-                        See More →
-                      </a>
-                    </Link>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="col-span-full text-center text-lg text-gray-600 dark:text-gray-400">
-                No events available at the moment.
-              </div>
-            )}
+                            events.slice(0, 3).map((event) => {
+                              const imagePath = `${API_URL}/public/${event.images?.[0]}`;
+                              return (
+                                <div
+                                  key={event._id}
+                                  className="group relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-105"
+                                >
+                                  <img
+                                    src={imagePath}
+                                    alt={event.name}
+                                    className="w-full h-48 object-cover"
+                                  />
+                                  <div className="p-6">
+                                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                                      {event.name}
+                                    </h3>
+                                    <p className="text-gray-700 mb-4">
+                                      {truncateText(event.description, 100)}
+                                    </p>
+                                    <Link href={`/event-details/${event._id}`} legacyBehavior>
+                                      <a className="text-indigo-600 hover:text-indigo-800 font-medium">
+                                        See More →
+                                      </a>
+                                    </Link>
+                                  </div>
+                                </div>
+                              );
+                            })
+                          ) : (
+                            <div className="col-span-full text-center text-lg text-gray-600 dark:text-gray-400">
+                              No events available at the moment.
+                            </div>
+                          )}
           </div>
 
         </div>

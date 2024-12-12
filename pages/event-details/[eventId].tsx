@@ -7,6 +7,9 @@ import "leaflet/dist/leaflet.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
+
+const API_URL = "http://localhost:3001";
+
 interface Event {
   _id: string;
   name: string;
@@ -130,12 +133,12 @@ const EventDetails = () => {
           <div className="container mx-auto p-6">
             <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-xl overflow-hidden">
               <div className="md:w-1/2 w-full flex-shrink-0 mb-6 md:mb-0 relative">
-                <img
-                  src={event.images?.[0] || "/placeholder-image.jpg"}
-                  alt={event.name || "Event image"}
-                  className="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-105"
-                  style={{ aspectRatio: "1" }}
-                />
+              <img
+                src={`${API_URL}/public/${event.images?.[0]}`}
+                alt={event.name || "Event image"}
+                className="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-105"
+                style={{ aspectRatio: "1" }}
+              />
               </div>
               <div className="md:w-1/2 w-full p-6 space-y-4">
                 <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 md:text-5xl">
