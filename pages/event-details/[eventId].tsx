@@ -6,7 +6,7 @@ import { MapPinIcon, CalendarIcon, ClockIcon } from "@heroicons/react/24/outline
 import "leaflet/dist/leaflet.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-
+import cookies from "js-cookie";
 
 const API_URL = "http://localhost:3001";
 
@@ -41,6 +41,9 @@ const EventDetails = () => {
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+
 
   useEffect(() => {
     if (eventId && typeof eventId === "string") {

@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 
-const uri = 'mongodb+srv://sansaporn294:2fd2lvC37c53pUE6@whatsonbkk.xki0j.mongodb.net/'; // Replace with your MongoDB URI
+const uri = process.env.MONGODB_URI; // Use environment variable for MongoDB URI
 const client = new MongoClient(uri);
 
 async function handler(req, res) {
