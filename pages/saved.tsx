@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { format } from "date-fns";
 import Link from "next/link";
 import { CalendarIcon, ClockIcon, MapPinIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
@@ -92,7 +90,6 @@ export default function SavedEventsPage() {
 
   return (
     <div className="bg-white dark:bg-black min-h-screen">
-      <Header />
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-6 text-center text-indigo-600">Saved Events</h1>
 
@@ -183,7 +180,6 @@ export default function SavedEventsPage() {
           )}
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

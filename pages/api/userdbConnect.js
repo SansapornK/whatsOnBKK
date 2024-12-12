@@ -2,6 +2,12 @@ import { MongoClient, ObjectId } from 'mongodb';
 import bcrypt from 'bcrypt';
 import { connectToDatabase } from './mongodb';
 
+
+import { hashPassword } from './utils';
+
+const hashedPassword = await hashPassword(password);
+
+
 export default async function handler(req, res) {
   try {
     const { db } = await connectToDatabase();

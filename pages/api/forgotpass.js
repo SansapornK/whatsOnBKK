@@ -49,9 +49,11 @@ app.post('/forgot-password', async (req, res) => {
 
     // Generate reset token
     const resetToken = crypto.randomBytes(32).toString('hex');
-    const resetTokenExpiry = Date.now() + 3600000; // Token valid for 1 hour
+    if (!resetToken) {
+      return res.status(500).json({ message: 'Failed to generate reset token' });
+    }
 
-    // Save token and expiry to user
+    const resetTokenExpiry = Date.now() + 3600000; // Token valid for 1 hour
     user.resetToken = resetToken;
     user.resetTokenExpiry = resetTokenExpiry;
     await user.save();
@@ -69,9 +71,13 @@ app.post('/forgot-password', async (req, res) => {
              <p>If you did not request this, please ignore this email.</p>`,
     };
 
-    await transporter.sendMail(mailOptions);
-
-    res.status(200).json({ message: 'Password reset email sent successfully.' });
+    try {
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({ message: 'Password reset email sent successfully.' });
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+      res.status(500).json({ message: 'Failed to send reset email. Please try again.' });
+    }
   } catch (error) {
     console.error('Error in forgot-password:', error);
     res.status(500).json({ message: 'Internal server error.' });
