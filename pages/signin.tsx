@@ -8,8 +8,8 @@ export default function SignIn() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // const response = await fetch("/api/dbConnect?type=events");
-    const response = await fetch('/api/dbConnect?type=user', {
+
+    const response = await fetch('./api/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),

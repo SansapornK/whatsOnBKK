@@ -1,5 +1,8 @@
-import bcrypt from 'bcrypt';
-import { connectToDatabase } from './mongodb';  // Import the connectToDatabase function
+const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
+
+const uri = process.env.MONGODB_URI; // Use environment variable for MongoDB URI
+const client = new MongoClient(uri);
 
 async function handler(req, res) {
   if (req.method === 'POST') {
@@ -9,9 +12,9 @@ async function handler(req, res) {
       // Decode the password (if URL-encoded in the request body)
       password = decodeURIComponent(password);
 
-      // Use the connectToDatabase function to get the database connection
-      const { db } = await connectToDatabase();  // Get the database object
-      const usersCollection = db.collection('user');
+      await client.connect();
+      const database = client.db('whatsonbkk');
+      const usersCollection = database.collection('user');
 
       // Find user by email
       const user = await usersCollection.findOne({ email });
@@ -32,6 +35,8 @@ async function handler(req, res) {
     } catch (error) {
       console.error('Error during authentication:', error);
       return res.status(500).json({ message: 'Internal server error' });
+    } finally {
+      await client.close();
     }
   } else {
     res.setHeader('Allow', ['POST']);
