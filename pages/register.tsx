@@ -35,7 +35,7 @@ export default function User() {
         mobile: formData.number,
         password: formData.password
       };
-  
+
       // Send data to the API
       await axios.post('/api/userdbConnect', newUser);
   

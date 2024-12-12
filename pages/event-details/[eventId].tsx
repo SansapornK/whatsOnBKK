@@ -162,6 +162,12 @@ const EventDetails = () => {
                   <ClockIcon className="h-5 w-5 text-indigo-600 mr-2" />
                   <p>{formattedTimeStart} - {formattedTimeEnd}</p>
                 </div>
+                <button
+                  className="py-2 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500"
+                  onClick={() => router.push('/saved')}
+                >
+                  Saved
+                </button>
               </div>
             </div>
             <div className="mt-8">
@@ -177,4 +183,3 @@ const EventDetails = () => {
 };
 
 export default EventDetails;
-

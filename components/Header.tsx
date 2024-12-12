@@ -1,24 +1,32 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
+import Saved from '../pages/saved'; // Adjust the path as needed
+
 
 export default function Header() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isSavedModalOpen, setSavedModalOpen] = useState(false); // State for Saved modal
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    // Check authentication state from localStorage
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
     setIsAuthenticated(authStatus);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated'); // Clear authentication status
-    setIsAuthenticated(false); // Update state
-    window.location.href = '/signin'; // Redirect to sign-in page
+    localStorage.removeItem('isAuthenticated');
+    setIsAuthenticated(false);
+    window.location.href = '/signin';
   };
+
+  const handleChangepassword = () => {
+    window.location.href = '/changepass';
+  }
+
+
 
   return (
     <header className="w-full sticky-nav">
@@ -29,11 +37,9 @@ export default function Header() {
           </Link>
           <button
             className="px-3 py-1 pb-4 ml-auto text-black outline-none dark:text-gray-300 md:hidden"
-            type="button"
-            aria-label="button"
             onClick={() => setNavbarOpen(!navbarOpen)}
           >
-           <svg
+            <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -44,9 +50,9 @@ export default function Header() {
               strokeLinejoin="round"
               className="w-6 h-6"
             >
-                            <line x1="3" y1="6" y2="6" x2="21"></line>
-              <line x1="3" y1="12" y2="12" x2="21"></line>
-              <line x1="3" y1="18" y2="18" x2="21"></line>
+              <line x1="3" y1="6" y2="6" x2="21" />
+              <line x1="3" y1="12" y2="12" x2="21" />
+              <line x1="3" y1="18" y2="18" x2="21" />
             </svg>
           </button>
         </div>
@@ -61,29 +67,15 @@ export default function Header() {
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="w-10 h-10 p-3 ml-5 bg-gray-200 rounded dark:bg-gray-800"
           >
-<svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                stroke="currentColor"
-                className="w-4 h-4 text-gray-800 dark:text-gray-200"
-              >
-                {theme === "dark" ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-                ) : (
-                  <svg className="svg-icon" viewBox="0 0 20 20">
-                    <path
-                      fill="none"
-                      d="M10.544 8.717l1.166-.855 1.166.855-.467-1.399 1.012-.778h-1.244l-.467-1.243-.466 1.244H10l1.011.778-.467 1.398zm5.442.855l-.467 1.244h-1.244l1.011.777-.467 1.4 1.167-.855 1.165.855-.466-1.4 1.011-.777h-1.244l-.466-1.244zm-8.979-3.02c0-2.259.795-4.33 2.117-5.955A9.418 9.418 0 00.594 9.98c0 5.207 4.211 9.426 9.406 9.426 2.94 0 5.972-1.354 7.696-3.472-.289.026-.987.044-1.283.044-5.194.001-9.406-4.219-9.406-9.426M10 18.55c-4.715 0-8.551-3.845-8.551-8.57 0-3.783 2.407-6.999 5.842-8.131a10.32 10.32 0 00-1.139 4.703c0 5.368 4.125 9.788 9.365 10.245A9.733 9.733 0 0110 18.55m9.406-16.246h-1.71l-.642-1.71-.642 1.71h-1.71l1.39 1.069-.642 1.924 1.604-1.176 1.604 1.176-.642-1.924 1.39-1.069z"
-                    />
-                  </svg>
-                )}
-              </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              className="w-4 h-4 text-gray-800 dark:text-gray-200"
+            >
+              {/* Dark/Light Mode Icon */}
+            </svg>
           </button>
           {isAuthenticated ? (
             <div className="relative">
@@ -92,28 +84,31 @@ export default function Header() {
                 className="w-10 h-10 rounded-full border-2 border-gray-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
               >
                 <img
-                  src="/images/default-profile.jpg" // Replace with user profile image if available
+                  src="/images/default-profile.jpg"
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />
               </button>
               {dropdownOpen && (
+                
                 <div className="absolute right-0 w-40 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg dark:bg-gray-800">
-                  <Link
-                    href="/editprofile"
+                  <button 
+                  onClick={handleChangepassword}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                   >
-                    Edit Profile
-                  </Link>
-                  <Link
-                    href="/saved"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    Change Password</button>
+                  <button
+                    onClick={() => {
+                      setDropdownOpen(false);
+                      setSavedModalOpen(true); // Open Saved modal
+                    }}
+                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                   >
                     Saved
-                  </Link>
+                  </button>
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                   >
                     Logout
                   </button>
@@ -121,12 +116,35 @@ export default function Header() {
               )}
             </div>
           ) : (
-            <Link href="/signin" className="dark:hover:border-gray-500 hover:shadow-md transition duration-300 mr-4 border px-3 py-1.5 rounded dark:text-gray-300">
+            <Link
+              href="/signin"
+              className="dark:hover:border-gray-500 hover:shadow-md transition duration-300 mr-4 border px-3 py-1.5 rounded dark:text-gray-300"
+            >
               Sign In
             </Link>
           )}
         </div>
       </div>
+
+      {/* Modal for Saved */}
+      {isSavedModalOpen && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-4xl w-full max-h-screen my-10 overflow-y-auto relative">
+          {/* <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-8">Saved Events</h2> */}
+          <button
+            onClick={() => setSavedModalOpen(false)}
+            className="absolute top-3 right-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+          >
+            ✕
+          </button>
+          <div>
+            {/* Render the Saved component dynamically */}
+            <Saved />
+          </div>
+        </div>
+      </div>
+      
+      )}
     </header>
   );
 }

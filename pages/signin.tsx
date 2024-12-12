@@ -78,6 +78,14 @@ export default function SignIn() {
             </div>
           </div>
           <div>
+          <div className="forgot-password text-center">
+            <a href="/forgotpass">Forgot Password?</a>
+            </div>
+            <div className="text-center">
+            <a href="/register">Don't have any account?</a>
+            </div>
+            </div>
+            <div>
             <button
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
