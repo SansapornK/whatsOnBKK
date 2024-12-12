@@ -1,19 +1,27 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import Saved from '../pages/saved'; // Adjust the path as needed
+import dynamic from 'next/dynamic'; // Lazy loading for Saved component
 
+
+const Saved = dynamic(() => import('../pages/saved'), { ssr: false }); // Adjust the path as needed
 
 export default function Header() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isSavedModalOpen, setSavedModalOpen] = useState(false); // State for Saved modal
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  
 
+  // Ensure theme functionality is only mounted on the client
+  useEffect(() => setMounted(true), []);
   useEffect(() => {
-    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
-    setIsAuthenticated(authStatus);
+    if (typeof window !== 'undefined') {
+      const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+      setIsAuthenticated(authStatus);
+    }
   }, []);
 
   const handleLogout = () => {
@@ -22,18 +30,16 @@ export default function Header() {
     window.location.href = '/signin';
   };
 
-  const handleChangepassword = () => {
+  const handleChangePassword = () => {
     window.location.href = '/changepass';
-  }
-
-
+  };
 
   return (
     <header className="w-full sticky-nav">
       <div className="flex flex-col flex-wrap max-w-5xl p-2.5 mx-auto md:flex-row">
         <div className="flex flex-row items-center justify-between p-2 md:p-1">
           <Link href="/">
-            <img alt="Your Company" src="/images/logo.png" className="h-40 w-42" />
+            <img alt="Your Company" src="/images/logo.png" className="h-auto w-auto" />
           </Link>
           <button
             className="px-3 py-1 pb-4 ml-auto text-black outline-none dark:text-gray-300 md:hidden"
@@ -64,18 +70,30 @@ export default function Header() {
           </div>
           <button
             aria-label="Toggle Dark Mode"
+            type="button"
+            className="w-10 h-10 p-3 ml-5 mr-0 bg-gray-200 rounded md:ml-0 md:mr-5 dark:bg-gray-800"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="w-10 h-10 p-3 ml-5 bg-gray-200 rounded dark:bg-gray-800"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              stroke="currentColor"
-              className="w-4 h-4 text-gray-800 dark:text-gray-200"
-            >
-              {/* Dark/Light Mode Icon */}
-            </svg>
+            {mounted && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                stroke="currentColor"
+                className="w-4 h-4 text-gray-800 dark:text-gray-200"
+              >
+                {theme === 'dark' ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                ) : (
+                  <circle cx="12" cy="12" r="5" fill="currentColor" />
+                )}
+              </svg>
+            )}
           </button>
           {isAuthenticated ? (
             <div className="relative">
@@ -90,13 +108,13 @@ export default function Header() {
                 />
               </button>
               {dropdownOpen && (
-                
                 <div className="absolute right-0 w-40 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg dark:bg-gray-800">
-                  <button 
-                  onClick={handleChangepassword}
+                  <button
+                    onClick={handleChangePassword}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                   >
-                    Change Password</button>
+                    Change Password
+                  </button>
                   <button
                     onClick={() => {
                       setDropdownOpen(false);
@@ -125,25 +143,21 @@ export default function Header() {
           )}
         </div>
       </div>
-
       {/* Modal for Saved */}
       {isSavedModalOpen && (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-4xl w-full max-h-screen my-10 overflow-y-auto relative">
-          {/* <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-8">Saved Events</h2> */}
-          <button
-            onClick={() => setSavedModalOpen(false)}
-            className="absolute top-3 right-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-          >
-            ✕
-          </button>
-          <div>
-            {/* Render the Saved component dynamically */}
-            <Saved />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-4xl w-full max-h-screen my-10 overflow-y-auto relative">
+            <button
+              onClick={() => setSavedModalOpen(false)}
+              className="absolute top-3 right-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+            >
+              ✕
+            </button>
+            <div>
+              <Saved />
+            </div>
           </div>
         </div>
-      </div>
-      
       )}
     </header>
   );
