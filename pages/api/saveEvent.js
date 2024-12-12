@@ -1,34 +1,4 @@
 import dbConnect from './dbConnect'; // Your existing DB connection utility
-const mongoose = require('mongoose');
-
-const userSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  email: String,
-  mobile: String,
-  password: String,
-});
-const User = mongoose.model('user', userSchema);
-
-const eventSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    type: String,
-    location: {
-      area: String,
-      address: String,
-      coordinates: {
-        lat: Number,
-        lng: Number,
-      },
-    },
-    dateStart: String,
-    dateEnd: String,
-    timeStart: String,
-    timeEnd: String,
-    images: String, // Array of File objects for image files
-});
-const Event = mongoose.model('events', eventSchema);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

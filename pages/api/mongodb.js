@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 // Replace the URI with your MongoDB connection string
-const uri = "mongodb+srv://sansaporn294:2fd2lvC37c53pUE6@whatsonbkk.xki0j.mongodb.net/";
+const uri = process.env.MONGODB_URI;;
 
 let cachedDb = null;
 

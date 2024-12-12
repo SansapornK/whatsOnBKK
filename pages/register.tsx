@@ -36,7 +36,7 @@ export default function User() {
       };
 
       // Send data to the API
-      await axios.post('/api/userdbConnect', newUser);
+      await axios.post('/api/register', newUser);
 
       alert("Registration successful!");
       window.location.href = '/signin';
