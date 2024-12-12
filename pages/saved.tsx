@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import { format } from "date-fns";
 import Link from "next/link";
 import { CalendarIcon, ClockIcon, MapPinIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useRouter } from "next/router";
 
 interface Coordinates {
   lat: number;
@@ -40,9 +41,21 @@ export default function SavedEventsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter(); // Corrected placement of useRouter hook
 
   useEffect(() => {
-    // Fetch saved events from the API
+    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+    setIsAuthenticated(authStatus);
+  }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setIsModalOpen(true); // Show modal if not authenticated
+      return;
+    }
+
     const fetchSavedEvents = async () => {
       try {
         const response = await fetch("/api/dbConnect?type=user"); // Adjust the endpoint if necessary
@@ -68,7 +81,7 @@ export default function SavedEventsPage() {
     };
 
     fetchSavedEvents();
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     let filtered = events;
@@ -90,9 +103,31 @@ export default function SavedEventsPage() {
     setFilteredEvents(filtered);
   }, [searchTerm, selectedType, selectedArea, events]);
 
+  // Close Modal function
+  const closeModalAndGoBack = () => {
+    setIsModalOpen(false);  // Close the modal
+    router.back();  // Navigate back to the previous page
+  };
+
   return (
     <div className="bg-white dark:bg-black min-h-screen">
       <Header />
+      
+      {/* Modal for unauthenticated users */}
+      {isModalOpen && !isAuthenticated && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg p-6 w-1/3">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Authentication Required</h2>
+            <p className="text-gray-700 mb-4">You must be logged in to view saved events. Please <Link href="/signin" className="text-indigo-600 underline">sign in</Link> to continue.</p>
+            <div className="flex justify-end">
+              <button onClick={closeModalAndGoBack} className="bg-red-500 text-white py-2 px-4 rounded-lg">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-6 text-center text-indigo-600">Saved Events</h1>
 
