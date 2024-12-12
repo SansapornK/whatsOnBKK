@@ -3,11 +3,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { format } from "date-fns";
 import Link from "next/link";
-import { CalendarIcon, ClockIcon, MapPinIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';  // Import Heroicons
+import { CalendarIcon, ClockIcon, MapPinIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
-
-
-// Define a TypeScript interface based on the structure of your event document
 interface Coordinates {
   lat: number;
   lng: number;
@@ -25,51 +22,56 @@ interface Event {
   description: string;
   type: string;
   location: Location;
-  dateStart: string; // MongoDB stores date as a string in ISO format
+  dateStart: string;
   timeStart: string;
-  dateEnd: string; // MongoDB stores date as a string in ISO format
+  dateEnd: string;
   timeEnd: string;
-  createdBy: string; // Assuming createdBy is an ObjectId
-  images: string[]; // Array of image URLs
-  attendees: string[]; // Array of attendee ObjectIds
+  createdBy: string;
+  images: string[];
+  attendees: string[];
   isPublic: boolean;
-  createdAt: string; // ISO date string
-  updatedAt: string; // ISO date string
+  createdAt: string;
+  updatedAt: string;
 }
 
-export default function EventsPage() {
-  const [events, setEvents] = useState<Event[]>([]); // Use the Event type here
-  const [filteredEvents, setFilteredEvents] = useState<Event[]>([]); // Make sure it's an array
+export default function SavedEventsPage() {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
 
   useEffect(() => {
-    // Fetch events from the API
-    const fetchEvents = async () => {
+    // Fetch saved events from the API
+    const fetchSavedEvents = async () => {
       try {
-        const response = await fetch("/api/dbConnect?type=events");
-        const data: Event[] = await response.json(); // Type the response as Event[]
+        const response = await fetch("/api/dbConnect?type=user"); // Adjust the endpoint if necessary
+        const userData = await response.json();
 
-        if (Array.isArray(data)) {
-          setEvents(data);
-          setFilteredEvents(data); // Initial display
-        } else {
-          console.error("Fetched data is not an array:", data);
+        if (userData.eventid?.$oid) {
+          const eventIds = userData.eventid.$oid;
+
+          // Fetch details for all events in parallel
+          const eventPromises = eventIds.map((id: string) =>
+            fetch(`/api/dbConnect?type=events&id=${id}`).then((res) => res.json())
+          );
+
+          const eventData = await Promise.all(eventPromises);
+
+          const validEvents = eventData.filter((event) => event && event._id); // Filter valid responses
+          setEvents(validEvents);
+          setFilteredEvents(validEvents);
         }
       } catch (error) {
-        console.error("Error fetching events:", error);
+        console.error("Error fetching saved events:", error);
       }
     };
 
-    fetchEvents();
+    fetchSavedEvents();
   }, []);
 
-  // Handle search and filters
   useEffect(() => {
     let filtered = events;
-
-    console.log("Filtering with:", { searchTerm, selectedType, selectedArea });
 
     if (searchTerm) {
       filtered = filtered.filter((event) =>
@@ -82,9 +84,7 @@ export default function EventsPage() {
     }
 
     if (selectedArea) {
-      filtered = filtered.filter(
-        (event) => event.location.area === selectedArea
-      );
+      filtered = filtered.filter((event) => event.location.area === selectedArea);
     }
 
     setFilteredEvents(filtered);
@@ -94,7 +94,7 @@ export default function EventsPage() {
     <div className="bg-white dark:bg-black min-h-screen">
       <Header />
       <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6 text-center text-indigo-600">Current Events in Bangkok</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center text-indigo-600">Saved Events</h1>
 
         {/* Search and Filter Controls */}
         <div className="mb-6 flex flex-wrap gap-6 justify-center">
@@ -102,15 +102,13 @@ export default function EventsPage() {
           <div className="relative w-full sm:w-1/2 md:w-1/3">
             <input
               type="text"
-              placeholder="Search events..."
+              placeholder="Search saved events..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full p-3 pl-10 border rounded-xl bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition duration-200"
             />
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
           </div>
-          
-          
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
@@ -157,7 +155,6 @@ export default function EventsPage() {
 
                 <div className="p-6">
                   <h2 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300">{event.name}</h2>
-                  {/* Event Information with Icons */}
                   <div className="flex items-center text-gray-500 mt-2">
                     <MapPinIcon className="h-5 w-5 text-indigo-600 mr-2" />
                     <p>{event.location.area}</p>
@@ -171,7 +168,6 @@ export default function EventsPage() {
                     <p>{event.timeStart} - {event.timeEnd}</p>
                   </div>
 
-                  {/* See More Link */}
                   <Link href={`/event-details/${event._id}`} legacyBehavior>
                     <a className="text-indigo-600 hover:text-indigo-800 font-medium mt-4 inline-block">
                       See More →
@@ -182,11 +178,10 @@ export default function EventsPage() {
             ))
           ) : (
             <p className="col-span-full text-center text-lg text-gray-600 dark:text-gray-400">
-              No events found.
+              No saved events found.
             </p>
           )}
         </div>
-
       </div>
       <Footer />
     </div>
