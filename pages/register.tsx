@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { createBrowserHistory } from 'history';
-import { useEffect } from 'react';
-
 
 export default function User() {
   const [formData, setFormData] = useState({
@@ -14,36 +11,35 @@ export default function User() {
     cpassword: ''
   });
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     try {
       // Check if passwords match
       if (formData.password !== formData.cpassword) {
         alert("Passwords do not match!");
         return;
       }
-  
+
       // Create a new user object
       const newUser = {
         firstName: formData.name,
         lastName: formData.lname,
         email: formData.email,
         mobile: formData.number,
-        password: formData.password
+        password: formData.password,
       };
 
       // Send data to the API
       await axios.post('/api/userdbConnect', newUser);
-  
+
+      alert("Registration successful!");
       window.location.href = '/signin';
-      
-      if (typeof window !== "undefined") {
-        window.location.href = '/signin'; // Safe to access window here
-      }
     } catch (error) {
       console.error("Error registering user:", error);
       alert("There was an error creating your account. Please try again.");

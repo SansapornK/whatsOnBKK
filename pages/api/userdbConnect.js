@@ -24,27 +24,31 @@ export default async function handler(req, res) {
       return res.status(200).json(userData);
     }
 
-    if (req.method === 'PUT') {
-      const { id } = req.query;
-      const { firstName, lastName, email, mobile } = req.body;
+    if (req.method === 'POST') {
+      const { firstName, lastName, email, mobile, password } = req.body;
 
-      if (!id || !firstName || !lastName || !email || !mobile) {
-        return res.status(400).json({ error: 'Invalid input data' });
+      // Validation for required fields
+      if (!firstName || !lastName || !email || !mobile || !password) {
+        return res.status(400).json({ error: 'All fields are required' });
       }
 
-      const updated = await db.collection('user').updateOne(
-        { _id: new ObjectId(id) },
-        { $set: { firstName, lastName, email, mobile } }
-      );
+      // Hash the password before storing
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-      if (!updated.matchedCount) {
-        return res.status(404).json({ error: 'User not found' });
-      }
+      const newUser = {
+        firstName,
+        lastName,
+        email,
+        mobile,
+        password: hashedPassword,
+      };
 
-      return res.status(200).json({ message: 'User updated successfully' });
+      const result = await db.collection('user').insertOne(newUser);
+
+      return res.status(201).json({ message: 'User created successfully', userId: result.insertedId });
     }
 
-    res.setHeader('Allow', ['GET', 'PUT']);
+    res.setHeader('Allow', ['GET', 'POST']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   } catch (error) {
     console.error("Error in userdbConnect:", error);
