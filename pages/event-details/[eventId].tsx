@@ -20,8 +20,10 @@ interface Event {
       lng: number;
     };
   };
-  date: string;
-  time: string;
+  dateStart: string; 
+  timeStart: string;
+  dateEnd: string; 
+  timeEnd: string;
   createdBy: string;
   images: string[];
   attendees: string[];
@@ -90,8 +92,8 @@ const EventDetails = () => {
         .bindPopup(`
           <strong>${event.name}</strong><br>
           Location: ${event.location.area}<br>
-          Date: ${format(new Date(event.date), "MMM dd, yyyy")}<br>
-          Time: ${event.time}
+          Date: ${formattedDateStart} ${formattedDateEnd}<br>
+          Time: ${event.timeStart} ${event.timeEnd}<br>
         `);
     }
   }, [event]);
@@ -109,8 +111,10 @@ const EventDetails = () => {
   }
 
   const isValidDate = (date: string) => !isNaN(new Date(date).getTime());
-  const formattedDate = isValidDate(event.date) ? format(new Date(event.date), "MMM dd, yyyy") : "Invalid date";
-  const formattedTime = event.time || "Time not available";
+  const formattedDateStart = format(new Date(event.dateStart), 'MMM dd, yyyy');
+  const formattedDateEnd = format(new Date(event.dateEnd), 'MMM dd, yyyy');
+  const formattedTimeStart = event.timeStart || "Time not available";
+  const formattedTimeEnd = event.timeEnd || "Time not available";
 
   const eventLocation = event.location?.area || "Location not available";
   const eventAddress = event.location?.address || "Address not available";
@@ -149,11 +153,11 @@ const EventDetails = () => {
                 </div>
                 <div className="flex items-center text-gray-500 mb-2">
                   <CalendarIcon className="h-5 w-5 text-indigo-600 mr-2" />
-                  <p>{formattedDate}</p>
+                  <p>{formattedDateStart} - {formattedDateEnd}</p>
                 </div>
                 <div className="flex items-center text-gray-500 mb-4">
                   <ClockIcon className="h-5 w-5 text-indigo-600 mr-2" />
-                  <p>{formattedTime}</p>
+                  <p>{formattedTimeStart} - {formattedTimeEnd}</p>
                 </div>
               </div>
             </div>

@@ -12,8 +12,10 @@ interface Event {
   description: string;
   type: string;
   location: Location;
-  date: string; // MongoDB stores date as a string in ISO format
-  time: string;
+  dateStart: string; 
+  timeStart: string;
+  dateEnd: string; 
+  timeEnd: string;
   createdBy: string; // Assuming createdBy is an ObjectId
   images: string[]; // Array of image URLs
   attendees: string[]; // Array of attendee ObjectIds
@@ -99,7 +101,7 @@ export default function EventPreview() {
                   className="group relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-105"
                 >
                   <img
-                    src={event.images?.[0] || "/placeholder-image.jpg"} // Use event image or placeholder
+                    src={event.images?.[0] || "/placeholder-image.jpg"} 
                     alt={event.name}
                     className="w-full h-48 object-cover"
                   />

@@ -25,8 +25,10 @@ interface Event {
   description: string;
   type: string;
   location: Location;
-  date: string; // MongoDB stores date as a string in ISO format
-  time: string;
+  dateStart: string; // MongoDB stores date as a string in ISO format
+  timeStart: string;
+  dateEnd: string; // MongoDB stores date as a string in ISO format
+  timeEnd: string;
   createdBy: string; // Assuming createdBy is an ObjectId
   images: string[]; // Array of image URLs
   attendees: string[]; // Array of attendee ObjectIds
@@ -162,11 +164,11 @@ export default function EventsPage() {
                   </div>
                   <div className="flex items-center text-gray-500 mt-2">
                     <CalendarIcon className="h-5 w-5 text-indigo-600 mr-2" />
-                    <p>{format(new Date(event.date), 'MMM dd, yyyy')}</p>
+                    <p>{format(new Date(event.dateStart), 'MMM dd, yyyy')} - {format(new Date(event.dateEnd), 'MMM dd, yyyy')}</p>
                   </div>
                   <div className="flex items-center text-gray-500 mt-2">
                     <ClockIcon className="h-5 w-5 text-indigo-600 mr-2" />
-                    <p>{event.time}</p>
+                    <p>{event.timeStart} - {event.timeEnd}</p>
                   </div>
 
                   {/* See More Link */}

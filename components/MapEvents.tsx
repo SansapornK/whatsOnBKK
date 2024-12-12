@@ -15,8 +15,10 @@ interface Event {
       lng: number;
     };
   };
-  date: string;
-  time: string;
+  dateStart: string; 
+  timeStart: string;
+  dateEnd: string; 
+  timeEnd: string;
   createdBy: string;
   images: string[];
   attendees: string[];
@@ -72,7 +74,8 @@ const MapEvents: React.FC = () => {
             }
 
 
-            const formattedDate = format(new Date(event.date), 'MMM dd, yyyy')
+            const formattedDateStart = format(new Date(event.dateStart), 'MMM dd, yyyy')
+            const formattedDateEnd = format(new Date(event.dateEnd), 'MMM dd, yyyy')
 
             // Add marker to the map
             L.marker([coordinates.lat, coordinates.lng], { icon: pinIcon })
@@ -80,8 +83,8 @@ const MapEvents: React.FC = () => {
               .bindPopup(`
                 <b>${event.name}</b><br>
                 Location: ${event.location.area}<br>
-                Date: ${formattedDate}<br>
-                Time: ${event.time}<br>
+                Date: ${formattedDateStart} ${formattedDateEnd}<br>
+                Time: ${event.timeStart} ${event.timeEnd}<br>
                 
               `);
           });
