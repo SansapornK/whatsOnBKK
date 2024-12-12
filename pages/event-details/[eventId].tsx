@@ -6,7 +6,7 @@ import { MapPinIcon, CalendarIcon, ClockIcon } from "@heroicons/react/24/outline
 import "leaflet/dist/leaflet.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import cookies from "js-cookie";
+
 
 const API_URL = "http://localhost:3001";
 
@@ -23,9 +23,9 @@ interface Event {
       lng: number;
     };
   };
-  dateStart: string; 
+  dateStart: string;
   timeStart: string;
-  dateEnd: string; 
+  dateEnd: string;
   timeEnd: string;
   createdBy: string;
   images: string[];
@@ -33,17 +33,21 @@ interface Event {
   isPublic: boolean;
   createdAt: string;
   updatedAt: string;
+  interestCount: number;
 }
 
 const EventDetails = () => {
   const router = useRouter();
   const { eventId } = router.query;
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Get authentication status
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null);
 
+  useEffect(() => {
+    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+    setIsAuthenticated(authStatus);
+  }, []);
 
   useEffect(() => {
     if (eventId && typeof eventId === "string") {
@@ -68,41 +72,29 @@ const EventDetails = () => {
     }
   }, [eventId]);
 
-  useEffect(() => {
-    if (event && event.location?.coordinates) {
-        const L = require("leaflet");
-      // Initialize Leaflet map
-      const map = L.map("map", {
-        center: [event.location.coordinates.lat, event.location.coordinates.lng],
-        zoom: 15,
+  const handleInterest = async () => {
+    try {
+      const res = await fetch(`/api/interestEvent?id=${eventId}`, { 
+        method: "POST",
       });
 
-      // TileLayer for map
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+      const data = await res.json();
 
-      // Custom icon for event marker
-      const pinIcon = L.icon({
-        iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png", // Custom icon URL
-        iconSize: [30, 30],
-        iconAnchor: [15, 30],
-        popupAnchor: [0, -20],
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to update interest");
+      }
+
+      alert("You have shown interest in this event!");
+      setEvent((prevEvent) => {
+        if (prevEvent) {
+          return { ...prevEvent, interestCount: prevEvent.interestCount + 1 }; // Increment the interest count
+        }
+        return prevEvent;
       });
-
-      // Add marker to map
-      L.marker([event.location.coordinates.lat, event.location.coordinates.lng], {
-        icon: pinIcon,
-      })
-        .addTo(map)
-        .bindPopup(`
-          <strong>${event.name}</strong><br>
-          Location: ${event.location.area}<br>
-          Date: ${formattedDateStart} ${formattedDateEnd}<br>
-          Time: ${event.timeStart} ${event.timeEnd}<br>
-        `);
+    } catch (error) {
+      alert(`Error updating interest`);
     }
-  }, [event]);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -116,12 +108,10 @@ const EventDetails = () => {
     return <div>Event not found.</div>;
   }
 
-  const isValidDate = (date: string) => !isNaN(new Date(date).getTime());
-  const formattedDateStart = format(new Date(event.dateStart), 'MMM dd, yyyy');
-  const formattedDateEnd = format(new Date(event.dateEnd), 'MMM dd, yyyy');
+  const formattedDateStart = format(new Date(event.dateStart), "MMM dd, yyyy");
+  const formattedDateEnd = format(new Date(event.dateEnd), "MMM dd, yyyy");
   const formattedTimeStart = event.timeStart || "Time not available";
   const formattedTimeEnd = event.timeEnd || "Time not available";
-
   const eventLocation = event.location?.area || "Location not available";
   const eventAddress = event.location?.address || "Address not available";
 
@@ -136,12 +126,12 @@ const EventDetails = () => {
           <div className="container mx-auto p-6">
             <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-xl overflow-hidden">
               <div className="md:w-1/2 w-full flex-shrink-0 mb-6 md:mb-0 relative">
-              <img
-                src={`${API_URL}/public/${event.images?.[0]}`}
-                alt={event.name || "Event image"}
-                className="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-105"
-                style={{ aspectRatio: "1" }}
-              />
+                <img
+                  src={`${API_URL}/public/${event.images?.[0]}`}
+                  alt={event.name || "Event image"}
+                  className="w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-105"
+                  style={{ aspectRatio: "1" }}
+                />
               </div>
               <div className="md:w-1/2 w-full p-6 space-y-4">
                 <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 md:text-5xl">
@@ -165,12 +155,21 @@ const EventDetails = () => {
                   <ClockIcon className="h-5 w-5 text-indigo-600 mr-2" />
                   <p>{formattedTimeStart} - {formattedTimeEnd}</p>
                 </div>
-                <button
-                  className="py-2 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500"
-                  onClick={() => router.push('/saved')}
-                >
-                  Saved
-                </button>
+
+                {isAuthenticated ? (
+                  <button
+                    className="py-2 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500"
+                    onClick={handleInterest}
+                  >
+                    Interested ({event.interestCount || 0})
+                  </button>
+                ) : (
+                  <a href="/signin">
+                    <button className="py-2 px-4 bg-gray-600 text-white rounded-lg hover:bg-gray-500">
+                      Login to show interest
+                    </button>
+                  </a>
+                )}
               </div>
             </div>
             <div className="mt-8">
@@ -180,7 +179,7 @@ const EventDetails = () => {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

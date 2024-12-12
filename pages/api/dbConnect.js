@@ -42,22 +42,6 @@ export default async function handler(req, res) {
         const areasCollection = db.collection('areas');
         data = await areasCollection.find({}).toArray();
 
-      // } else if (type === 'user') {
-      //   // Forward the request to signin.js (POST request)
-      //   const response = await fetch(`${process.env.BASE_URL}/api/signin`, {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify(req.body), // Pass the same body as in the original request
-      //   });
-      //   if (response.ok) {
-      //     const userData = await response.json(); // Get the response from signin.js
-      //     return res.status(200).json(userData); // Return the user data from signin.js
-      //   } else {
-      //     const errorData = await response.json();
-      //     return res.status(response.status).json(errorData); // Return the error from signin.js
-      //   }
 
         
       } else {
