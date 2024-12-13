@@ -66,7 +66,7 @@ export default function Header() {
           <div className="flex flex-wrap items-center justify-center pt-1 pl-2 ml-1 space-x-8 md:space-x-16 md:mx-auto md:pl-14">
             <Link href="/event">Upcoming Events</Link>
             <Link href="/map">Map</Link>
-            <Link href="/editprofile">About Us</Link>
+            <Link href="/about">About Us</Link>
           </div>
           <button
             aria-label="Toggle Dark Mode"
