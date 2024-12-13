@@ -34,8 +34,16 @@ const ForgotPass: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 py-12 px-6">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+        <div className="flex justify-between items-center mb-4">
+          <button
+            onClick={() => window.history.back()}
+            className="text-sm text-indigo-600 hover:text-indigo-800 focus:outline-none"
+          >
+            &larr; Back
+          </button>
+        </div>
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
           Forgot Password
         </h2>
@@ -54,12 +62,12 @@ const ForgotPass: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="block w-full px-4 py-2 text-base text-gray-900 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none"
             />
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-indigo-600 py-2 px-4 text-white hover:bg-indigo-500"
+            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-105"
           >
             Send
           </button>

@@ -45,7 +45,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 py-12 px-6">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
         <h1 className="text-2xl font-semibold text-center text-gray-700 mb-4">Reset Your Password</h1>
         {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
@@ -68,7 +68,7 @@ export default function ResetPassword() {
           />
           <button
             type="submit"
-            className="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-105"
           >
             Change Password
           </button>

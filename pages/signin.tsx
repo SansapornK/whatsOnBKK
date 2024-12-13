@@ -18,35 +18,43 @@ export default function SignIn() {
     const data = await response.json();
 
     if (response.status === 200) {
-      // Redirect to home page
-      // router.push('/forgotpass');
       localStorage.setItem('isAuthenticated', 'true');
       router.push('/');
     } else {
-      // Show alert for incorrect credentials
       alert(data.message || 'Incorrect email or password');
     }
   };
 
+  const handleGoBack = () => {
+    router.push('/');
+  };
+
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center">
-        {/* <GoBackButton /> */}
-        <h4 className="text-2xl font-bold tracking-tight text-gray-900">Sign In</h4>
-        <div className="flex items-center justify-center ">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 py-12 px-6">
+      <div className="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full">
+        {/* Go Back Button */}
+        <button 
+          onClick={handleGoBack}
+          className="text-white bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded-full font-semibold text-lg mb-6 transition-all duration-300 ease-in-out transform hover:scale-105"
+        >
+          Go Back to Home
+        </button>
+
+        <h4 className="text-3xl font-bold text-center text-gray-900 mb-8">
+          Sign In
+        </h4>
+
+        <div className="flex justify-center mb-6">
           <img
-            alt="Your Company"
+            alt="Logo"
             src="/images/logo.png"
-            className="ml-4 h-40 w-42"
+            className="h-auto w-auto rounded-full"
           />
         </div>
-      </div>
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-              Email address
-            </label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
             <div className="mt-2">
               <input
                 id="email"
@@ -56,14 +64,13 @@ export default function SignIn() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 autoComplete="email"
-                className="block w-full rounded-md bg-gray-100 px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                className="block w-full px-4 py-2 text-base text-gray-900 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none"
               />
             </div>
           </div>
+
           <div>
-            <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
-              Password
-            </label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
             <div className="mt-2">
               <input
                 id="password"
@@ -73,22 +80,34 @@ export default function SignIn() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
-                className="block w-full rounded-md bg-gray-100 px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                className="block w-full px-4 py-2 text-base text-gray-900 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none"
               />
             </div>
           </div>
-          <div>
-          <div className="forgot-password text-center">
-            <a href="/forgotpass">Forgot Password?</a>
+
+          <div className="mt-4 space-y-4">
+            <div className="text-center">
+              <a
+                href="/forgotpass"
+                className="text-indigo-600 font-medium hover:text-indigo-700 hover:underline transition-all duration-300"
+              >
+                Forgot Password?
+              </a>
             </div>
             <div className="text-center">
-            <a href="/register">Don't have any account?</a>
+              <a
+                href="/register"
+                className="text-indigo-600 font-medium hover:text-indigo-700 hover:underline transition-all duration-300"
+              >
+                Don't have an account? <span className="text-indigo-500">Sign up</span>
+              </a>
             </div>
-            </div>
-            <div>
+          </div>
+
+          <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-105"
             >
               Sign in
             </button>

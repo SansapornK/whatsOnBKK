@@ -102,13 +102,13 @@ export default function AboutUs(): JSX.Element {
                         name: "Sansaporn Ketjaroen",
                         role: "65130010294",
                         description: "Computer Innovation for Communication",
-                        image: "/team-2.jpg",
+                        image: "images/team-2.jpg",
                         },
                         {
                         name: "Supichakorn Boonkasem",
                         role: "65130010497",
                         description: "Computer Innovation for Communication",
-                        image: "/team-3.jpg",
+                        image: "images/team-3.jpg",
                         },
                     ].map((member, index) => (
                         <div key={index} className="flex flex-col items-center text-center">
