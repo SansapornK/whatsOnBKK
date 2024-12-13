@@ -45,25 +45,35 @@ export default function ResetPassword() {
   };
 
   return (
-    <div>
-      <h1>Reset Your Password</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {message && <p style={{ color: 'green' }}>{message}</p>}
-      <form onSubmit={handlePasswordChange}>
-        <input
-          type="password"
-          placeholder="New Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Confirm New Password"
-          value={rePassword}
-          onChange={(e) => setRePassword(e.target.value)}
-        />
-        <button type="submit">Change Password</button>
-      </form>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+        <h1 className="text-2xl font-semibold text-center text-gray-700 mb-4">Reset Your Password</h1>
+        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+        {message && <p className="text-green-500 text-sm text-center mb-4">{message}</p>}
+        
+        <form onSubmit={handlePasswordChange}>
+          <input
+            type="password"
+            placeholder="New Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="password"
+            placeholder="Confirm New Password"
+            value={rePassword}
+            onChange={(e) => setRePassword(e.target.value)}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            className="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            Change Password
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

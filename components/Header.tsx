@@ -109,13 +109,7 @@ export default function Header() {
               </button>
               {dropdownOpen && (
                 <div className="absolute right-0 w-40 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg dark:bg-gray-800">
-                  <button
-                    onClick={handleChangePassword}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-                  >
-                    Change Password
-                  </button>
-                  <button
+                  {/* <button
                     onClick={() => {
                       setDropdownOpen(false);
                       setSavedModalOpen(true); // Open Saved modal
@@ -123,7 +117,7 @@ export default function Header() {
                     className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                   >
                     Saved
-                  </button>
+                  </button> */}
                   <button
                     onClick={handleLogout}
                     className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
